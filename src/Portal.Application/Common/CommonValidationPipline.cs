@@ -37,6 +37,7 @@ namespace Portal.Application.Common
                 }
 
                 throw new Exception(errorBuilder.ToString());
+
             }
 
             return await next.Invoke();
