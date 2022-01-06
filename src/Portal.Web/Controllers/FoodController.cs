@@ -5,14 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Portal.Application.Foods;
 using Portal.Application.Foods.Models;
+using MediatR;
+using Portal.Application.FoodApplication.Commands;
+using Portal.Application.FoodApplication.Query.FindById;
+using Portal.Application.FoodApplication.Query.FindAll;
 
 namespace Portal.Web.Controllers
 {
     public class FoodController : Controller
     {
         private readonly IFoodService _foodService;
-        public FoodController(IFoodService foodService)
+        private readonly IMediator madiator;
+        public FoodController(IFoodService foodService, IMediator madiator)
         {
+            this.madiator = madiator;
             _foodService = foodService;
         }
 
@@ -20,8 +26,23 @@ namespace Portal.Web.Controllers
         [Route("api/food")]
         public async Task<IActionResult> FindAll()
         {
-            var model = await _foodService.FindAll();
-            return Ok(model);
+            var result = await madiator.Send(new FindAllFoodQuery()
+            {
+            });
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/food/{id}")]
+        public async Task<IActionResult> FindById(int id)
+        {
+            var result = await madiator.Send(new FindByIdFoodQuery()
+            {
+                id = id
+            });
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -30,22 +51,21 @@ namespace Portal.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _foodService.Create(model);
-                return Ok(model);
+                var result = await madiator.Send(new CreateFoodCommand()
+                {
+                    Description = model.Description,
+                    FoodType = model.FoodType,
+                    Name = model.Name,
+                    Price = model.Price
+                });
+
+                return Ok(result);
             }
             else
             {
                 return BadRequest(ModelState);
             }
-      
-        }
 
-        [HttpGet]
-        [Route("api/food/{id}")]
-        public IActionResult FindById(int id)
-        {
-            var model = _foodService.FindById(id);
-            return Ok(model);
         }
     }
 }
