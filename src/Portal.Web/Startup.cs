@@ -20,6 +20,7 @@ using Portal.Application.FoodApplication.Commands;
 using Portal.Application.Foods;
 using Portal.Domain.Identity;
 using Portal.Persisatance;
+using FluentValidation;
 
 namespace Portal.Web
 {
@@ -51,6 +52,7 @@ namespace Portal.Web
             services.AddMediatR(typeof(CreateFoodCommand).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommonPiplineLogging<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommonValidationPipline<,>));
+            services.AddValidatorsFromAssemblyContaining<CreateFoodCommandValidator>();
 
             services.AddTransient<IFoodService, FoodService>();
 
@@ -60,8 +62,8 @@ namespace Portal.Web
             services.AddControllers();
 
             services.AddRazorPages()
-                .AddRazorRuntimeCompilation()
-                .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<FoodAddValidator>(); });
+                .AddRazorRuntimeCompilation();
+            //.AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<FoodAddValidator>(); });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

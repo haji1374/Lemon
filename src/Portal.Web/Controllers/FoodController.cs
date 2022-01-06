@@ -49,8 +49,7 @@ namespace Portal.Web.Controllers
         [Route("api/food")]
         public async Task<IActionResult> Create(FoodAddInfo model)
         {
-            if (ModelState.IsValid)
-            {
+          
                 var result = await madiator.Send(new CreateFoodCommand()
                 {
                     Description = model.Description,
@@ -60,11 +59,7 @@ namespace Portal.Web.Controllers
                 });
 
                 return Ok(result);
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+       
 
         }
     }
