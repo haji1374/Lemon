@@ -2,8 +2,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Portal.Persisatance;
 using MediatR;
+using Portal.Domain.Common;
 
-namespace Portal.Application.FoodApplication.Commands
+namespace Portal.Application.FoodApplication.Commands.Create
 {
     public class CreateFoodCommandHandler : IRequestHandler<CreateFoodCommand, int>
     {

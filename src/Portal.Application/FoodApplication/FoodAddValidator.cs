@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Portal.Application.Foods
 {
-    public class FoodAddValidator: AbstractValidator<FoodAddInfo>
+    public class FoodAddValidator : AbstractValidator<FoodAddInfo>
     {
         public FoodAddValidator()
         {

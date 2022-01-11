@@ -1,12 +1,13 @@
-﻿using Portal.Common.Enums;
+using MediatR;
+using Portal.Common.Enums;
 using Portal.Domain.Common;
 
-namespace Portal.Application.Foods.Models
+namespace Portal.Application.FoodApplication.Commands.Edit
 {
-    public class FoodEditInfo
+    public class EditFoodCommand : IRequest<int>
     {
         public int Id { get; set; }
-        public int Price { get; set; }
+        public Money Price { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public FoodType FoodType { get; set; }

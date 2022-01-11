@@ -1,4 +1,5 @@
 ﻿using Portal.Common.Enums;
+using Portal.Domain.Common;
 
 namespace Portal.Application.Foods.Models
 {

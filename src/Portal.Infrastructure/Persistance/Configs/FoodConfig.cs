@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Portal.Domain;
+using Portal.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Portal.Persistance.Configs
             builder.HasIndex(f => f.Name).IsUnique();
             builder.Property(f => f.Name).HasMaxLength(25).IsRequired();
             builder.Property(f => f.Description).HasMaxLength(1000).IsRequired();
+
+            builder.OwnsOne<Money>(it => it.Price);
         }
     }
 }

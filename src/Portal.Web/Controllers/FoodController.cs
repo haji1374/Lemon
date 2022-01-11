@@ -9,9 +9,12 @@ using MediatR;
 using Portal.Application.FoodApplication.Commands;
 using Portal.Application.FoodApplication.Query.FindById;
 using Portal.Application.FoodApplication.Query.FindAll;
+using Portal.Application.FoodApplication.Commands.Create;
+using Portal.Application.FoodApplication.Commands.Edit;
 
 namespace Portal.Web.Controllers
 {
+    [ApiController]
     public class FoodController : Controller
     {
         private readonly IFoodService _foodService;
@@ -49,18 +52,32 @@ namespace Portal.Web.Controllers
         [Route("api/food")]
         public async Task<IActionResult> Create(FoodAddInfo model)
         {
-          
-                var result = await madiator.Send(new CreateFoodCommand()
-                {
-                    Description = model.Description,
-                    FoodType = model.FoodType,
-                    Name = model.Name,
-                    Price = model.Price
-                });
+            var result = await madiator.Send(new CreateFoodCommand()
+            {
+                Description = model.Description,
+                FoodType = model.FoodType,
+                Name = model.Name,
+                Price = new Domain.Common.Money(model.Price)
+            });
 
-                return Ok(result);
-       
+            return Ok(result);
+        }
 
+
+        [HttpPut]
+        [Route("api/food")]
+        public async Task<IActionResult> Edit(FoodEditInfo model)
+        {
+            var result = await madiator.Send(new EditFoodCommand()
+            {
+                Description = model.Description,
+                FoodType = model.FoodType,
+                Name = model.Name,
+                Price = new Domain.Common.Money(model.Price),
+                Id = model.Id
+            });
+
+            return Ok(result);
         }
     }
 }

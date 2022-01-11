@@ -38,7 +38,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
 
             await _foodService.Create(new Application.Foods.Models.FoodAddInfo
             {
-                Price = PriceAmount,
+                // Price = newPriceAmount,
                 Description = Description,
                 FoodType = FoodType,
                 Name = Name

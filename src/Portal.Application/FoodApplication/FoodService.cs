@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Portal.Application.Foods.Models;
 using Portal.Domain;
+using Portal.Domain.Common;
 using Portal.Persisatance;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace Portal.Application.Foods
             {
                 Id=foodEditInfo.Id,
                 Name = foodEditInfo.Name,
-                Price = foodEditInfo.Price,
+                // Price = foodEditInfo.Price,
                 FoodType = foodEditInfo.FoodType,
                 Description = foodEditInfo.Description
             };

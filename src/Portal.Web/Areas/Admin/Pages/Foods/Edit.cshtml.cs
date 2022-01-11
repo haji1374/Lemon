@@ -26,7 +26,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
             var food = await _foodService.GetEdit(id);
 
             Id = food.Id;
-            PriceAmount = food.Price;
+            // PriceAmount = food.Price;
             Name = food.Name;
             Description = food.Description;
             FoodType = food.FoodType;
@@ -41,7 +41,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
             {
                 Id = Id,
                 Name = Name,
-                Price = PriceAmount,
+                // Price = PriceAmount,
                 Description = Description,
                 FoodType = FoodType
             });
