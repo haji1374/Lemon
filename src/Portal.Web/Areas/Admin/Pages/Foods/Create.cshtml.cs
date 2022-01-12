@@ -40,7 +40,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
             {
                 // Price = newPriceAmount,
                 Description = Description,
-                FoodType = FoodType,
+                // FoodType = FoodType,
                 Name = Name
             });
 

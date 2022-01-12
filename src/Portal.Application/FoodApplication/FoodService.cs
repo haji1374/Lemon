@@ -59,7 +59,7 @@ namespace Portal.Application.Foods
                 Id=foodEditInfo.Id,
                 Name = foodEditInfo.Name,
                 // Price = foodEditInfo.Price,
-                FoodType = foodEditInfo.FoodType,
+                // FoodType = foodEditInfo.FoodType,
                 Description = foodEditInfo.Description
             };
                         

@@ -29,7 +29,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
             // PriceAmount = food.Price;
             Name = food.Name;
             Description = food.Description;
-            FoodType = food.FoodType;
+            // FoodType = food.FoodType;
             return Page();
 
         }
@@ -43,7 +43,7 @@ namespace Portal.Web.Areas.Admin.Pages.Foods
                 Name = Name,
                 // Price = PriceAmount,
                 Description = Description,
-                FoodType = FoodType
+                // FoodType = FoodType
             });
 
             return RedirectToPage("./Index");

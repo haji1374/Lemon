@@ -11,6 +11,7 @@ using Portal.Application.FoodApplication.Query.FindById;
 using Portal.Application.FoodApplication.Query.FindAll;
 using Portal.Application.FoodApplication.Commands.Create;
 using Portal.Application.FoodApplication.Commands.Edit;
+using Portal.Common.Enums;
 
 namespace Portal.Web.Controllers
 {
@@ -55,7 +56,7 @@ namespace Portal.Web.Controllers
             var result = await madiator.Send(new CreateFoodCommand()
             {
                 Description = model.Description,
-                FoodType = model.FoodType,
+                FoodType = FoodType.GetAll<FoodType>().Single(it => it.Id == model.FoodType),
                 Name = model.Name,
                 Price = new Domain.Common.Money(model.Price)
             });
@@ -71,7 +72,7 @@ namespace Portal.Web.Controllers
             var result = await madiator.Send(new EditFoodCommand()
             {
                 Description = model.Description,
-                FoodType = model.FoodType,
+                FoodType = FoodType.GetAll<FoodType>().Single(it => it.Id == model.FoodType),
                 Name = model.Name,
                 Price = new Domain.Common.Money(model.Price),
                 Id = model.Id
