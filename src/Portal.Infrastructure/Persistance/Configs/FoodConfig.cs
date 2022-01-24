@@ -14,6 +14,8 @@ namespace Portal.Persistance.Configs
     {
         public void Configure(EntityTypeBuilder<Food> builder)
         {
+            builder.Property(it=> it.Id).UseHiLo();
+            
             builder.HasIndex(f => f.Name).IsUnique();
             builder.Property(f => f.Name).HasMaxLength(25).IsRequired();
             builder.Property(f => f.Description).HasMaxLength(1000).IsRequired();

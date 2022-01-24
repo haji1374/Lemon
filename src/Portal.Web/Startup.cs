@@ -22,6 +22,7 @@ using Portal.Domain.Identity;
 using Portal.Persisatance;
 using FluentValidation;
 using Portal.Application.FoodApplication.Commands.Create;
+using MediatR.Pipeline;
 
 namespace Portal.Web
 {
@@ -53,6 +54,7 @@ namespace Portal.Web
             services.AddMediatR(typeof(CreateFoodCommand).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommonPiplineLogging<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommonValidationPipline<,>));
+            services.AddTransient(typeof(IRequestPostProcessor<,>), typeof(CommonCommitPostProcessorPipline<,>));
             services.AddValidatorsFromAssemblyContaining<CreateFoodCommandValidator>();
 
             services.AddTransient<IFoodService, FoodService>();

@@ -17,7 +17,7 @@ namespace Portal.Application.FoodApplication.Commands.Create
 
         public async Task<int> Handle(CreateFoodCommand request, CancellationToken cancellationToken)
         {
-            var entity = db.Foods.Add(new Domain.Food()
+            var entity = await db.Foods.AddAsync(new Domain.Food()
             {
                 Description = request.Description,
                 FoodType = request.FoodType,
@@ -25,7 +25,7 @@ namespace Portal.Application.FoodApplication.Commands.Create
                 Price = request.Price
             });
 
-            await db.SaveChangesAsync();
+            // await db.SaveChangesAsync();
             return entity.Entity.Id;
         }
     }

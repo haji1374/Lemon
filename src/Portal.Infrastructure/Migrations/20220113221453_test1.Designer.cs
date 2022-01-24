@@ -10,8 +10,8 @@ using Portal.Persisatance;
 namespace Portal.Infrastructure.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20220111202536_Private setter added to Money")]
-    partial class PrivatesetteraddedtoMoney
+    [Migration("20220113221453_test1")]
+    partial class test1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,7 @@ namespace Portal.Infrastructure.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -161,14 +162,16 @@ namespace Portal.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
-                    b.Property<int>("FoodType")
+                    b.Property<int?>("FoodType")
+                        .HasColumnName("FoodType")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -305,9 +308,7 @@ namespace Portal.Infrastructure.Migrations
                     b.OwnsOne("Portal.Domain.Common.Money", "Price", b1 =>
                         {
                             b1.Property<int>("FoodId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("int");
 
                             b1.Property<int>("Value")
                                 .HasColumnType("int");
